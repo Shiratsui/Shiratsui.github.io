@@ -2,10 +2,48 @@ const year = document.querySelector("#year");
 const themeToggle = document.querySelector(".theme-toggle");
 const themeToggleText = document.querySelector(".theme-toggle-text");
 const revealElements = document.querySelectorAll(".reveal, .reveal-item");
+const dynamicDurations = document.querySelectorAll("[data-duration-start]");
 
 if (year) {
   year.textContent = new Date().getFullYear();
 }
+
+function formatDurationFrom(startValue, endDate = new Date()) {
+  const [startYear, startMonth, startDay = 1] = startValue.split("-").map(Number);
+
+  if (!startYear || !startMonth) {
+    return "";
+  }
+
+  let monthTotal = (endDate.getFullYear() - startYear) * 12 + (endDate.getMonth() + 1 - startMonth);
+
+  if (endDate.getDate() < startDay) {
+    monthTotal -= 1;
+  }
+
+  monthTotal = Math.max(0, monthTotal);
+  const years = Math.floor(monthTotal / 12);
+  const months = monthTotal % 12;
+  const parts = [];
+
+  if (years > 0) {
+    parts.push(`${years} ${years === 1 ? "yr" : "yrs"}`);
+  }
+
+  if (months > 0 || parts.length === 0) {
+    parts.push(`${months} ${months === 1 ? "mo" : "mos"}`);
+  }
+
+  return parts.join(" ");
+}
+
+dynamicDurations.forEach((duration) => {
+  const formatted = formatDurationFrom(duration.dataset.durationStart);
+
+  if (formatted) {
+    duration.textContent = formatted;
+  }
+});
 
 function setTheme(theme) {
   const isDark = theme === "dark";
