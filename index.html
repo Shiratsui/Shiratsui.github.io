@@ -17,6 +17,7 @@
       document.documentElement.dataset.theme = savedTheme || (systemPrefersDark ? "dark" : "light");
     </script>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
   </head>
   <body>
     <header class="site-header">
@@ -27,6 +28,7 @@
           <a href="#projects">Projects</a>
           <a href="#skills">Skills</a>
           <a href="#contact">Contact</a>
+          <a href="#socials">Socials</a>
         </nav>
         <button class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">
           <span class="theme-toggle-icon" aria-hidden="true"></span>
@@ -125,9 +127,47 @@
           <h2 id="contact-title">Let's build something useful.</h2>
         </div>
         <div class="contact-actions">
-          <a class="button primary" href="mailto:hananmatatias96@gmail.com">Email</a>
-          <a class="button secondary" href="https://github.com/Shiratsui">GitHub</a>
-          <a class="button secondary" href="https://www.linkedin.com/in/matatias-hanan">LinkedIn</a>
+          <span class="button secondary" aria-label="Email address">
+            <i class="ti ti-mail button-icon" aria-hidden="true"></i>
+            <span>hananmatatias96@gmail.com</span>
+          </span>
+          <div class="social-actions">
+            <a class="button secondary" href="https://github.com/Shiratsui">
+              <i class="ti ti-brand-github button-icon" aria-hidden="true"></i>
+              <span>GitHub</span>
+            </a>
+            <a class="button secondary" href="https://www.linkedin.com/in/matatias-hanan">
+              <i class="ti ti-brand-linkedin button-icon" aria-hidden="true"></i>
+              <span>LinkedIn</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section social-section reveal" id="socials" aria-labelledby="socials-title">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">Socials</p>
+            <h2 id="socials-title">Where to find me</h2>
+          </div>
+        </div>
+        <div class="social-grid" aria-label="Social media links">
+          <a class="social-card reveal-item" href="https://steamcommunity.com/id/shiratsui/" aria-label="Steam profile">
+            <i class="ti ti-brand-steam social-icon" aria-hidden="true"></i>
+            <span>Steam</span>
+          </a>
+          <a class="social-card reveal-item" href="https://www.youtube.com/@shiratsui_" aria-label="YouTube channel">
+            <i class="ti ti-brand-youtube social-icon" aria-hidden="true"></i>
+            <span>YouTube</span>
+          </a>
+          <a class="social-card reveal-item" href="https://discord.com/users/shiratsui" aria-label="Discord profile">
+            <i class="ti ti-brand-discord social-icon" aria-hidden="true"></i>
+            <span>Discord</span>
+          </a>
+          <a class="social-card reveal-item" href="https://www.instagram.com/matatias.hanan/" aria-label="Instagram profile">
+            <i class="ti ti-brand-instagram social-icon" aria-hidden="true"></i>
+            <span>Instagram</span>
+          </a>
         </div>
       </section>
     </main>
