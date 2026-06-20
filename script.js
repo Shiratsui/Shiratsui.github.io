@@ -4,6 +4,7 @@ const themeToggleText = document.querySelector(".theme-toggle-text");
 const experienceTimeline = document.querySelector("#experience-timeline");
 const projectList = document.querySelector("#project-list");
 const skillList = document.querySelector("#skill-list");
+const systemMap = document.querySelector(".system-map");
 
 function formatDurationFrom(startValue, endDate = new Date()) {
   const [startYear, startMonth, startDay = 1] = startValue.split("-").map(Number);
@@ -288,4 +289,22 @@ function setupRevealAnimations() {
   revealElements.forEach((element) => revealObserver.observe(element));
 }
 
+function setupSystemFlow() {
+  if (!systemMap) {
+    return;
+  }
+
+  const cycleDuration = 16000;
+  const setRandomCacheState = () => {
+    const hasCache = Math.random() >= 0.5;
+
+    systemMap.classList.toggle("cache-exists", hasCache);
+    systemMap.classList.toggle("cache-miss", !hasCache);
+  };
+
+  setRandomCacheState();
+  window.setInterval(setRandomCacheState, cycleDuration);
+}
+
+setupSystemFlow();
 Promise.all([loadExperience(), loadProjects(), loadSkills()]).finally(setupRevealAnimations);

@@ -462,28 +462,39 @@ h3 {
 .system-map {
   bottom: 8%;
   inset-inline: 7%;
-  min-height: 250px;
+  min-height: 260px;
   position: absolute;
   --node-width: 112px;
   --node-height: 68px;
+  --left-x: 12%;
+  --center-x: 50%;
+  --data-port-x: 78%;
+  --mid-y: 50%;
+  --data-top-y: 28%;
+  --data-bottom-y: 72%;
+  --flow-duration: 16000ms;
   z-index: 1;
 }
 
-.system-map::before,
-.system-map::after {
-  background: linear-gradient(90deg, transparent, var(--teal), transparent);
-  content: "";
-  height: 2px;
-  left: 18%;
-  opacity: 0.62;
+.flow-lines {
+  height: 100%;
+  inset: 0;
   position: absolute;
-  right: 18%;
-  top: 50%;
+  width: 100%;
   z-index: 0;
 }
 
-.system-map::after {
-  transform: rotate(90deg);
+.flow-lines path {
+  fill: none;
+  opacity: 0.48;
+  stroke: var(--teal);
+  stroke-linecap: butt;
+  stroke-width: 0.75;
+}
+
+.flow-lines .flow-line-vertical {
+  opacity: 0.36;
+  stroke-width: 0.4;
 }
 
 .system-node {
@@ -506,52 +517,96 @@ h3 {
   box-shadow: 0 14px 34px rgba(0, 0, 0, 0.24);
 }
 
+.system-node.frontend {
+  left: calc(var(--left-x) - (var(--node-width) / 2));
+  top: calc(var(--mid-y) - (var(--node-height) / 2));
+}
+
 .system-node.api {
-  left: calc(50% - (var(--node-width) / 2));
-  top: 0;
+  left: calc(var(--center-x) - (var(--node-width) / 2));
+  top: calc(var(--mid-y) - (var(--node-height) / 2));
+}
+
+.system-node.cache,
+.system-node.database {
+  --node-width: 104px;
+  left: var(--data-port-x);
 }
 
 .system-node.cache {
-  left: 0;
-  top: calc(50% - (var(--node-height) / 2));
-}
-
-.system-node.queue {
-  right: 0;
-  top: calc(50% - (var(--node-height) / 2));
+  top: calc(var(--data-top-y) - (var(--node-height) / 2));
 }
 
 .system-node.database {
-  bottom: 0;
-  left: calc(50% - (var(--node-width) / 2));
+  top: calc(var(--data-bottom-y) - (var(--node-height) / 2));
 }
 
-.pulse {
+.flow-packet {
   background: var(--teal);
   border-radius: 999px;
-  box-shadow: 0 0 22px var(--teal);
+  box-shadow: 0 0 14px var(--teal);
   height: 10px;
+  left: var(--left-x);
   position: absolute;
+  top: var(--mid-y);
+  transform: translate(-50%, -50%);
   width: 10px;
   z-index: 1;
 }
 
-.pulse-one {
-  animation: moveLeftToCenter 2200ms ease-in-out infinite;
-  left: 22%;
-  top: calc(50% - 4px);
+.packet-request {
+  animation: flowRequest var(--flow-duration) linear infinite;
 }
 
-.pulse-two {
-  animation: moveTopToBottom 2600ms ease-in-out infinite;
-  left: calc(50% - 5px);
-  top: 22%;
+.packet-cache-check {
+  animation: flowCacheCheck var(--flow-duration) linear infinite;
 }
 
-.pulse-three {
-  animation: moveRightToCenter 2400ms ease-in-out infinite;
-  left: 78%;
-  top: calc(50% - 4px);
+.packet-hit {
+  animation: flowCacheHit var(--flow-duration) linear infinite;
+}
+
+.packet-miss {
+  animation: flowCacheMiss var(--flow-duration) linear infinite;
+}
+
+.decision-label {
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid currentColor;
+  border-radius: 7px;
+  color: var(--teal);
+  display: flex;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.78rem;
+  font-weight: 800;
+  height: 38px;
+  justify-content: center;
+  left: calc(var(--center-x) - 54px);
+  letter-spacing: 0;
+  opacity: 0;
+  position: absolute;
+  top: calc(var(--mid-y) - 86px);
+  width: 108px;
+  z-index: 3;
+}
+
+.decision-hit {
+  animation: showCacheHit var(--flow-duration) linear infinite;
+}
+
+.decision-miss {
+  animation: showCacheMiss var(--flow-duration) linear infinite;
+  color: var(--amber);
+}
+
+.system-map.cache-exists .packet-miss,
+.system-map.cache-exists .decision-miss,
+.system-map:not(.cache-miss) .packet-miss,
+.system-map:not(.cache-miss) .decision-miss,
+.system-map.cache-miss .packet-hit,
+.system-map.cache-miss .decision-hit {
+  display: none;
 }
 
 .section {
@@ -961,36 +1016,232 @@ h3 {
   }
 }
 
-@keyframes moveLeftToCenter {
+@keyframes flowRequest {
   0%,
+  8%,
   100% {
-    left: 22%;
+    left: var(--left-x);
+    opacity: 0;
+    top: var(--mid-y);
   }
 
-  50% {
-    left: 50%;
+  9% {
+    opacity: 1;
+  }
+
+  22% {
+    left: var(--center-x);
+    opacity: 1;
+    top: var(--mid-y);
+  }
+
+  23% {
+    left: var(--center-x);
+    opacity: 0;
+    top: var(--mid-y);
   }
 }
 
-@keyframes moveRightToCenter {
+@keyframes flowCacheCheck {
   0%,
+  22%,
   100% {
-    left: 78%;
+    background: var(--teal);
+    box-shadow: 0 0 14px var(--teal);
+    left: var(--center-x);
+    opacity: 0;
+    top: var(--mid-y);
   }
 
-  50% {
-    left: 50%;
+  23% {
+    opacity: 1;
+  }
+
+  28% {
+    left: var(--center-x);
+    opacity: 1;
+    top: 46%;
+  }
+
+  35% {
+    left: 72%;
+    opacity: 1;
+    top: 46%;
+  }
+
+  42% {
+    left: 72%;
+    opacity: 1;
+    top: var(--data-top-y);
+  }
+
+  48% {
+    left: var(--data-port-x);
+    opacity: 1;
+    top: var(--data-top-y);
+  }
+
+  53% {
+    left: 72%;
+    opacity: 1;
+    top: var(--data-top-y);
+  }
+
+  58% {
+    left: 72%;
+    opacity: 1;
+    top: 46%;
+  }
+
+  63% {
+    left: var(--center-x);
+    opacity: 1;
+    top: 46%;
+  }
+
+  64% {
+    left: var(--center-x);
+    opacity: 1;
+    top: var(--mid-y);
+  }
+
+  65% {
+    left: var(--center-x);
+    opacity: 0;
+    top: var(--mid-y);
   }
 }
 
-@keyframes moveTopToBottom {
+@keyframes flowCacheHit {
   0%,
+  64%,
   100% {
-    top: 22%;
+    background: var(--teal);
+    box-shadow: 0 0 14px var(--teal);
+    left: var(--center-x);
+    opacity: 0;
+    top: var(--mid-y);
   }
 
-  50% {
-    top: 78%;
+  65%,
+  74% {
+    opacity: 1;
+  }
+
+  82% {
+    left: 42%;
+    opacity: 1;
+    top: var(--mid-y);
+  }
+
+  90% {
+    left: var(--left-x);
+    opacity: 1;
+    top: var(--mid-y);
+  }
+
+  91% {
+    left: var(--left-x);
+    opacity: 0;
+    top: var(--mid-y);
+  }
+}
+
+@keyframes flowCacheMiss {
+  0%,
+  64% {
+    background: var(--amber);
+    box-shadow: 0 0 14px var(--amber);
+    left: var(--center-x);
+    opacity: 0;
+    top: var(--mid-y);
+  }
+
+  65%,
+  69% {
+    opacity: 1;
+  }
+
+  70% {
+    left: var(--center-x);
+    opacity: 1;
+    top: 54%;
+  }
+
+  75% {
+    left: 72%;
+    opacity: 1;
+    top: 54%;
+  }
+
+  80% {
+    left: 72%;
+    opacity: 1;
+    top: var(--data-bottom-y);
+  }
+
+  84% {
+    left: var(--data-port-x);
+    opacity: 1;
+    top: var(--data-bottom-y);
+  }
+
+  88% {
+    left: 72%;
+    opacity: 1;
+    top: var(--data-bottom-y);
+  }
+
+  90% {
+    left: var(--center-x);
+    opacity: 1;
+    top: var(--mid-y);
+  }
+
+  98% {
+    left: var(--left-x);
+    opacity: 1;
+    top: var(--mid-y);
+  }
+
+  100% {
+    background: var(--amber);
+    box-shadow: 0 0 14px var(--amber);
+    left: var(--left-x);
+    opacity: 0;
+    top: var(--mid-y);
+  }
+}
+
+@keyframes showCacheHit {
+  0%,
+  64%,
+  90%,
+  100% {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  65%,
+  84% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes showCacheMiss {
+  0%,
+  64%,
+  92%,
+  100% {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  65%,
+  88% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -1089,20 +1340,16 @@ h3 {
 
   .system-map {
     inset-inline: 5%;
+    --data-port-x: 72%;
     --node-height: 58px;
     --node-width: 88px;
   }
 
-  @keyframes moveTopToBottom {
-    0%,
-    100% {
-      top: 22%;
-    }
-
-    50% {
-      top: 78%;
-    }
+  .system-node.cache,
+  .system-node.database {
+    --node-width: 88px;
   }
+
 }
 
 @media (prefers-reduced-motion: reduce) {
