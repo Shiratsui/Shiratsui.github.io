@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Personal portfolio website for Matatias Hanan, a software developer.">
+    <title>Matatias Hanan</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="Matatias Hanan home">Matatias Hanan</a>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="#work">Work</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="intro-title">
+        <div class="hero-content">
+          <p class="eyebrow">Backend Engineer Enthusiast</p>
+          <h1 id="intro-title">Just an enthusiast Backend Engineer with Curiosity</h1>
+          <p class="hero-copy">
+              A simple portfolio of mine. About my skills, my projects, and my journey as a Backend Engineer.
+          </p>
+          <div class="hero-actions" aria-label="Primary actions">
+            <a class="button primary" href="#work">View work</a>
+            <a class="button secondary" href="#contact">Contact me</a>
+          </div>
+        </div>
+        <img class="hero-visual" src="assets/hero-workspace.svg" alt="Illustration of a modern developer workspace">
+      </section>
+
+      <section class="section intro-grid" aria-label="Profile summary">
+        <div>
+          <p class="section-kicker">About</p>
+          <h2>Code some hassle things, to fun things</h2>
+        </div>
+        <p>
+            I enjoy analyzing my daily problems and finding solutions through code. Creating useful tools and applications to solve real-world problems.
+        </p>
+      </section>
+
+      <section class="section" id="work" aria-labelledby="work-title">
+        <div class="section-heading">
+          <p class="section-kicker">Some of my Projects</p>
+          <h2 id="work-title">Projects</h2>
+        </div>
+        <div class="project-grid">
+          <article class="project-card">
+            <h3>POS API</h3>
+            <p>Backend Framework to manage POS transactions and inventory, with some complex logics like Recommendation, and Estimation.</p>
+            <ul class="tags" aria-label="Project technologies">
+              <li>NodeJS</li>
+              <li>MySQL</li>
+              <li>Redis</li>
+              <li>AWS</li>
+              <li>NestJS</li>
+            </ul>
+          </article>
+
+          <article class="project-card">
+            <h3>Admin Panel</h3>
+            <p>Old Fashioned Admin Panel, using PHP Code Igniter, then developing a new one using Next.js. Using casbin as the authorization library.</p>
+            <ul class="tags" aria-label="Project technologies">
+              <li>PHP</li>
+              <li>Next.js</li>
+              <li>Casbin</li>
+            </ul>
+          </article>
+
+          <article class="project-card">
+            <h3>OpenERP (Odoo)</h3>
+            <p>Developing, maintaining, and customizing OpenERP (Odoo) to meet the needs of our clients.</p>
+            <ul class="tags" aria-label="Project technologies">
+              <li>Python</li>
+              <li>Odoo</li>
+            </ul>
+          </article>
+
+          <article class="project-card">
+            <h3>Minecraft Addon</h3>
+            <p>Developing a custom Minecraft addon to enhance gameplay and add new features. Creating custom commands, events, to handle multi-server interactions.</p>
+            <ul class="tags" aria-label="Project technologies">
+              <li>Docker</li>
+              <li>Java</li>
+            </ul>
+          </article>
+
+          <article class="project-card">
+            <h3>Discord Bot</h3>
+            <p>Developing a custom Discord bot to enhance server interactions and automate tasks, with music tools. Integrate the API using Django as the backend.</p>
+            <ul class="tags" aria-label="Project technologies">
+              <li>NodeJS</li>
+              <li>Discord.js</li>
+              <li>Django</li>
+            </ul>
+          </article>
+
+          <article class="project-card">
+            <h3>Password Management Website</h3>
+            <p>Developing a password management website to securely store and manage user credentials. Using google auth and 2FA as login methods.</p>
+            <ul class="tags" aria-label="Project technologies">
+              <li>NodeJS</li>
+              <li>Next.js</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section split-section" id="skills" aria-labelledby="skills-title">
+        <div>
+          <p class="section-kicker">Skills</p>
+          <h2 id="skills-title">What I work with</h2>
+        </div>
+        <div class="skill-list" aria-label="Technical skills">
+          <span>Backend Development</span>
+          <span>Javascript (React, Next.js, Nest.js)</span>
+          <span>Python (Django, OpenERP)</span>
+          <span>ERP Knowledge</span>
+          <span>Docker</span>
+          <span>Git & GitHub</span>
+          <span>Optimization</span>
+          <span>Performance</span>
+          <span>Deployment</span>
+          <span>Mid-level Frontend Development</span>
+        </div>
+      </section>
+
+      <section class="section contact-section" id="contact" aria-labelledby="contact-title">
+        <div>
+          <p class="section-kicker">Contact</p>
+          <h2 id="contact-title">Let's build something useful.</h2>
+        </div>
+        <div class="contact-actions">
+          <a class="button primary" href="mailto:hananmatatias96@gmail.com">Email</a>
+          <a class="button secondary" href="https://github.com/Shiratsui">GitHub</a>
+          <a class="button secondary" href="https://www.linkedin.com/in/matatias-hanan-423a67181">LinkedIn</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>(c) <span id="year">2026</span>Matatias Hanan. Built for GitHub Pages.</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

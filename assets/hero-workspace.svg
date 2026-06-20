@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 825" role="img" aria-labelledby="title desc">
+  <title id="title">Modern developer workspace</title>
+  <desc id="desc">A clean desk with a laptop, notebook, lamp, and abstract interface panels.</desc>
+  <defs>
+    <linearGradient id="wall" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#fffaf0"/>
+      <stop offset="0.55" stop-color="#eff5ef"/>
+      <stop offset="1" stop-color="#dfe9e5"/>
+    </linearGradient>
+    <linearGradient id="screen" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#102522"/>
+      <stop offset="1" stop-color="#17423c"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="24" stdDeviation="26" flood-color="#17201b" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="825" fill="url(#wall)"/>
+  <circle cx="1080" cy="96" r="170" fill="#f3c783" opacity="0.4"/>
+  <circle cx="118" cy="704" r="210" fill="#77b8ad" opacity="0.22"/>
+  <path d="M0 612c158-42 304-44 438-6 185 52 328 38 510-42 85-37 169-53 252-49v310H0Z" fill="#dce8e1"/>
+  <g filter="url(#shadow)">
+    <rect x="164" y="542" width="872" height="74" rx="22" fill="#f9fbf7"/>
+    <rect x="214" y="596" width="774" height="28" rx="14" fill="#d9ddd7"/>
+  </g>
+  <g filter="url(#shadow)">
+    <path d="M354 206h492c24 0 44 20 44 44v302H310V250c0-24 20-44 44-44Z" fill="#22302b"/>
+    <path d="M340 238h520v286H340Z" fill="url(#screen)"/>
+    <path d="M267 552h666l52 55H216Z" fill="#dfe4df"/>
+    <path d="M436 575h320l24 18H412Z" fill="#bcc8c2"/>
+  </g>
+  <g opacity="0.96">
+    <rect x="378" y="278" width="176" height="198" rx="12" fill="#eff8f4" opacity="0.09"/>
+    <rect x="594" y="278" width="226" height="54" rx="12" fill="#77b8ad" opacity="0.28"/>
+    <rect x="594" y="358" width="92" height="22" rx="8" fill="#f3c783"/>
+    <rect x="704" y="358" width="116" height="22" rx="8" fill="#eff8f4" opacity="0.18"/>
+    <rect x="594" y="406" width="192" height="18" rx="7" fill="#eff8f4" opacity="0.24"/>
+    <rect x="594" y="438" width="148" height="18" rx="7" fill="#eff8f4" opacity="0.16"/>
+    <rect x="405" y="306" width="78" height="14" rx="7" fill="#77b8ad"/>
+    <rect x="405" y="340" width="122" height="14" rx="7" fill="#eff8f4" opacity="0.2"/>
+    <rect x="405" y="374" width="98" height="14" rx="7" fill="#f3c783" opacity="0.8"/>
+    <rect x="405" y="408" width="128" height="14" rx="7" fill="#eff8f4" opacity="0.2"/>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="108" y="390" width="150" height="210" rx="18" fill="#ffffff"/>
+    <rect x="128" y="424" width="110" height="12" rx="6" fill="#0f766e" opacity="0.72"/>
+    <rect x="128" y="456" width="82" height="10" rx="5" fill="#c67b2d" opacity="0.58"/>
+    <rect x="128" y="486" width="100" height="10" rx="5" fill="#9eb1a8"/>
+    <rect x="128" y="516" width="72" height="10" rx="5" fill="#9eb1a8"/>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="916" y="372" width="120" height="152" rx="12" fill="#ffffff"/>
+    <path d="M937 402h78M937 432h56M937 462h70" stroke="#8aa19a" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="976" cy="512" r="15" fill="#c67b2d"/>
+  </g>
+  <g>
+    <path d="M990 346c0-78 48-138 111-138" fill="none" stroke="#0f766e" stroke-width="16" stroke-linecap="round"/>
+    <circle cx="1104" cy="208" r="44" fill="#f3c783"/>
+    <rect x="972" y="338" width="72" height="26" rx="13" fill="#0f766e"/>
+  </g>
+</svg>
