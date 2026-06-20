@@ -557,6 +557,11 @@ h3 {
   padding: clamp(22px, 4vw, 34px);
 }
 
+.timeline-status {
+  color: var(--muted);
+  margin: 0;
+}
+
 .company-block {
   align-items: center;
   display: flex;

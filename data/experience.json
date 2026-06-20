@@ -1,0 +1,34 @@
+{
+  "company": {
+    "name": "Fore Coffee",
+    "mark": "FC",
+    "type": "Full-time",
+    "durationStart": "2019-08-01"
+  },
+  "roles": [
+    {
+      "title": "Senior Backend Engineer",
+      "start": "2025-01-01",
+      "end": null,
+      "location": "Surabaya, East Java, Indonesia",
+      "description": "Developing complex operational and customer-facing features with readable, maintainable architecture.",
+      "skills": ["Node.js", "Next.js", "Architecture"]
+    },
+    {
+      "title": "Backend Engineer",
+      "start": "2020-10-01",
+      "end": "2025-01-01",
+      "location": "Surabaya, East Java, Indonesia",
+      "description": "Developed and maintained features for internal apps, POS systems, and ERP workflows.",
+      "skills": ["Node.js", "OpenERP", "POS"]
+    },
+    {
+      "title": "Junior Backend Engineer",
+      "start": "2019-08-01",
+      "end": "2020-10-01",
+      "location": "Surabaya, East Java, Indonesia",
+      "description": "Helped build internal projects and handled ERP and internal app development.",
+      "skills": ["OpenERP", "React.js", "Internal Tools"]
+    }
+  ]
+}

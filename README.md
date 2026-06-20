@@ -4,13 +4,19 @@ A simple, modern static portfolio website that can be deployed directly to GitHu
 
 ## Preview Locally
 
-Open `index.html` in a browser, or run this from PowerShell:
+Run a small local server from PowerShell:
 
 ```powershell
-Start-Process .\index.html
+python -m http.server 8000
 ```
 
-No build step or dev server is required.
+Then open:
+
+```text
+http://localhost:8000
+```
+
+The local server is needed because the experience timeline loads from `data/experience.json`.
 
 ## Customize
 
@@ -33,6 +39,12 @@ The hero illustration is stored at:
 ```text
 assets/hero-workspace.svg
 ```
+
+Edit `data/experience.json` to update:
+
+- Company name and mark
+- Company duration start date
+- Job titles, dates, locations, descriptions, and skills
 
 ## Deploy to GitHub Pages
 

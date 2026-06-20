@@ -1,12 +1,7 @@
 const year = document.querySelector("#year");
 const themeToggle = document.querySelector(".theme-toggle");
 const themeToggleText = document.querySelector(".theme-toggle-text");
-const revealElements = document.querySelectorAll(".reveal, .reveal-item");
-const dynamicDurations = document.querySelectorAll("[data-duration-start]");
-
-if (year) {
-  year.textContent = new Date().getFullYear();
-}
+const experienceTimeline = document.querySelector("#experience-timeline");
 
 function formatDurationFrom(startValue, endDate = new Date()) {
   const [startYear, startMonth, startDay = 1] = startValue.split("-").map(Number);
@@ -37,13 +32,125 @@ function formatDurationFrom(startValue, endDate = new Date()) {
   return parts.join(" ");
 }
 
-dynamicDurations.forEach((duration) => {
-  const formatted = formatDurationFrom(duration.dataset.durationStart);
+function parseLocalDate(value) {
+  const [dateYear, dateMonth, dateDay = 1] = value.split("-").map(Number);
 
-  if (formatted) {
-    duration.textContent = formatted;
+  return new Date(dateYear, dateMonth - 1, dateDay);
+}
+
+function formatDateRange(startValue, endValue) {
+  const formatter = new Intl.DateTimeFormat("en", {
+    month: "short",
+    year: "numeric"
+  });
+  const start = formatter.format(parseLocalDate(startValue));
+
+  if (!endValue) {
+    return `${start} - Present`;
   }
-});
+
+  return `${start} - ${formatter.format(parseLocalDate(endValue))}`;
+}
+
+function createTagList(skills, label) {
+  const list = document.createElement("ul");
+  list.className = "tags";
+  list.setAttribute("aria-label", `${label} skills`);
+
+  skills.forEach((skill) => {
+    const item = document.createElement("li");
+    item.textContent = skill;
+    list.append(item);
+  });
+
+  return list;
+}
+
+function renderExperience(data) {
+  if (!experienceTimeline) {
+    return;
+  }
+
+  const companyBlock = document.createElement("div");
+  companyBlock.className = "company-block reveal-item";
+
+  const companyMark = document.createElement("div");
+  companyMark.className = "company-mark";
+  companyMark.setAttribute("aria-hidden", "true");
+  companyMark.textContent = data.company.mark;
+
+  const companyDetails = document.createElement("div");
+  const companyName = document.createElement("h3");
+  companyName.textContent = data.company.name;
+
+  const companyDuration = document.createElement("p");
+  companyDuration.textContent = `${data.company.type} - ${formatDurationFrom(data.company.durationStart)}`;
+
+  companyDetails.append(companyName, companyDuration);
+  companyBlock.append(companyMark, companyDetails);
+
+  const timeline = document.createElement("ol");
+  timeline.className = "timeline";
+  timeline.setAttribute("aria-label", `${data.company.name} experience timeline`);
+
+  data.roles.forEach((role) => {
+    const item = document.createElement("li");
+    item.className = "timeline-item reveal-item";
+
+    const dot = document.createElement("div");
+    dot.className = "timeline-dot";
+    dot.setAttribute("aria-hidden", "true");
+
+    const card = document.createElement("article");
+    card.className = "timeline-card";
+
+    const meta = document.createElement("div");
+    meta.className = "timeline-meta";
+
+    const range = document.createElement("span");
+    range.textContent = formatDateRange(role.start, role.end);
+
+    const location = document.createElement("span");
+    location.textContent = role.location;
+
+    const title = document.createElement("h3");
+    title.textContent = role.title;
+
+    const description = document.createElement("p");
+    description.textContent = role.description;
+
+    meta.append(range, location);
+    card.append(meta, title, description, createTagList(role.skills, role.title));
+    item.append(dot, card);
+    timeline.append(item);
+  });
+
+  experienceTimeline.replaceChildren(companyBlock, timeline);
+}
+
+async function loadExperience() {
+  if (!experienceTimeline) {
+    return;
+  }
+
+  try {
+    const response = await fetch("data/experience.json");
+
+    if (!response.ok) {
+      throw new Error(`Unable to load experience data: ${response.status}`);
+    }
+
+    const data = await response.json();
+    renderExperience(data);
+    setupRevealAnimations();
+  } catch (error) {
+    experienceTimeline.innerHTML = '<p class="timeline-status">Experience data could not be loaded. Run a local server or check data/experience.json.</p>';
+  }
+}
+
+if (year) {
+  year.textContent = new Date().getFullYear();
+}
 
 function setTheme(theme) {
   const isDark = theme === "dark";
@@ -74,7 +181,14 @@ if (themeToggle) {
   });
 }
 
-if ("IntersectionObserver" in window) {
+function setupRevealAnimations() {
+  const revealElements = document.querySelectorAll(".reveal, .reveal-item");
+
+  if (!("IntersectionObserver" in window)) {
+    revealElements.forEach((element) => element.classList.add("is-visible"));
+    return;
+  }
+
   const revealObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -88,6 +202,7 @@ if ("IntersectionObserver" in window) {
   );
 
   revealElements.forEach((element) => revealObserver.observe(element));
-} else {
-  revealElements.forEach((element) => element.classList.add("is-visible"));
 }
+
+loadExperience();
+setupRevealAnimations();
