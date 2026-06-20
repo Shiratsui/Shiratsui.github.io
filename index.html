@@ -6,7 +6,13 @@
     <meta name="description" content="Personal portfolio website for Matatias Hanan, a software developer.">
     <title>Matatias Hanan</title>
     <script>
-      const savedTheme = localStorage.getItem("theme");
+      document.documentElement.classList.add("js");
+      let savedTheme = null;
+      try {
+        savedTheme = localStorage.getItem("theme");
+      } catch (error) {
+        savedTheme = null;
+      }
       const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
       document.documentElement.dataset.theme = savedTheme || (systemPrefersDark ? "dark" : "light");
     </script>
@@ -29,22 +35,50 @@
     </header>
 
     <main id="top">
-      <section class="hero" aria-labelledby="intro-title">
-        <div class="hero-content">
+      <section class="hero reveal" aria-labelledby="intro-title">
+        <div class="hero-content reveal-item">
           <p class="eyebrow">Backend Engineer Enthusiast</p>
-          <h1 id="intro-title">Just an enthusiast Backend Engineer with Curiosity</h1>
+          <h1 id="intro-title">Just an enthusiast Backend Engineer</h1>
           <p class="hero-copy">
               A simple portfolio of mine. About my skills, my projects, and my journey as a Backend Engineer.
           </p>
+          <div class="backend-stats" aria-label="Backend focus areas">
+            <span><strong>API</strong> design</span>
+            <span><strong>DB</strong> logic</span>
+            <span><strong>Ops</strong> minded</span>
+          </div>
           <div class="hero-actions" aria-label="Primary actions">
             <a class="button primary" href="#work">View work</a>
             <a class="button secondary" href="#contact">Contact me</a>
           </div>
         </div>
-        <img class="hero-visual" src="assets/hero-workspace.svg" alt="Illustration of a modern developer workspace">
+        <div class="backend-visual reveal-item" aria-label="Animated backend system diagram">
+          <div class="terminal-window">
+            <div class="terminal-bar" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <div class="terminal-lines" aria-hidden="true">
+              <span>$ npm run service:api</span>
+              <span class="ok">connected redis://cache</span>
+              <span class="ok">mysql pool ready</span>
+              <span>worker queue listening...</span>
+            </div>
+          </div>
+          <div class="system-map" aria-hidden="true">
+            <div class="system-node api">API</div>
+            <div class="system-node cache">Redis</div>
+            <div class="system-node queue">Queue</div>
+            <div class="system-node database">MySQL</div>
+            <span class="pulse pulse-one"></span>
+            <span class="pulse pulse-two"></span>
+            <span class="pulse pulse-three"></span>
+          </div>
+        </div>
       </section>
 
-      <section class="section intro-grid" aria-label="Profile summary">
+      <section class="section intro-grid reveal" aria-label="Profile summary">
         <div>
           <p class="section-kicker">About</p>
           <h2>Code some hassle things, to fun things</h2>
@@ -54,13 +88,14 @@
         </p>
       </section>
 
-      <section class="section" id="work" aria-labelledby="work-title">
+      <section class="section reveal" id="work" aria-labelledby="work-title">
         <div class="section-heading">
           <p class="section-kicker">Some of my Projects</p>
           <h2 id="work-title">Projects</h2>
         </div>
         <div class="project-grid">
-          <article class="project-card">
+          <article class="project-card reveal-item">
+            <span class="project-index">01</span>
             <h3>POS API</h3>
             <p>Backend Framework to manage POS transactions and inventory, with some complex logics like Recommendation, and Estimation.</p>
             <ul class="tags" aria-label="Project technologies">
@@ -72,7 +107,8 @@
             </ul>
           </article>
 
-          <article class="project-card">
+          <article class="project-card reveal-item">
+            <span class="project-index">02</span>
             <h3>Admin Panel</h3>
             <p>Old Fashioned Admin Panel, using PHP Code Igniter, then developing a new one using Next.js. Using casbin as the authorization library.</p>
             <ul class="tags" aria-label="Project technologies">
@@ -82,7 +118,8 @@
             </ul>
           </article>
 
-          <article class="project-card">
+          <article class="project-card reveal-item">
+            <span class="project-index">03</span>
             <h3>OpenERP (Odoo)</h3>
             <p>Developing, maintaining, and customizing OpenERP (Odoo) to meet the needs of our clients.</p>
             <ul class="tags" aria-label="Project technologies">
@@ -91,7 +128,8 @@
             </ul>
           </article>
 
-          <article class="project-card">
+          <article class="project-card reveal-item">
+            <span class="project-index">04</span>
             <h3>Minecraft Addon</h3>
             <p>Developing a custom Minecraft addon to enhance gameplay and add new features. Creating custom commands, events, to handle multi-server interactions.</p>
             <ul class="tags" aria-label="Project technologies">
@@ -100,7 +138,8 @@
             </ul>
           </article>
 
-          <article class="project-card">
+          <article class="project-card reveal-item">
+            <span class="project-index">05</span>
             <h3>Discord Bot</h3>
             <p>Developing a custom Discord bot to enhance server interactions and automate tasks, with music tools. Integrate the API using Django as the backend.</p>
             <ul class="tags" aria-label="Project technologies">
@@ -110,7 +149,8 @@
             </ul>
           </article>
 
-          <article class="project-card">
+          <article class="project-card reveal-item">
+            <span class="project-index">06</span>
             <h3>Password Management Website</h3>
             <p>Developing a password management website to securely store and manage user credentials. Using google auth and 2FA as login methods.</p>
             <ul class="tags" aria-label="Project technologies">
@@ -121,7 +161,7 @@
         </div>
       </section>
 
-      <section class="section split-section" id="skills" aria-labelledby="skills-title">
+      <section class="section split-section reveal" id="skills" aria-labelledby="skills-title">
         <div>
           <p class="section-kicker">Skills</p>
           <h2 id="skills-title">What I work with</h2>
@@ -140,7 +180,7 @@
         </div>
       </section>
 
-      <section class="section contact-section" id="contact" aria-labelledby="contact-title">
+      <section class="section contact-section reveal" id="contact" aria-labelledby="contact-title">
         <div>
           <p class="section-kicker">Contact</p>
           <h2 id="contact-title">Let's build something useful.</h2>
