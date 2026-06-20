@@ -1,0 +1,38 @@
+[
+  {
+    "name": "POS API",
+    "description": "Backend framework to manage POS transactions and inventory, with complex logic like recommendation and estimation.",
+    "tags": ["NodeJS", "MySQL", "Redis", "AWS", "NestJS"],
+    "url": ""
+  },
+  {
+    "name": "Admin Panel",
+    "description": "Old-fashioned admin panel using PHP CodeIgniter, then developing a new one using Next.js. Uses Casbin as the authorization library.",
+    "tags": ["PHP", "Next.js", "Casbin"],
+    "url": ""
+  },
+  {
+    "name": "OpenERP (Odoo)",
+    "description": "Developing, maintaining, and customizing OpenERP (Odoo) to meet the needs of clients.",
+    "tags": ["Python", "Odoo"],
+    "url": ""
+  },
+  {
+    "name": "Minecraft Addon",
+    "description": "Developing a custom Minecraft addon to enhance gameplay, add features, create commands, and handle multi-server interactions.",
+    "tags": ["Docker", "Java"],
+    "url": ""
+  },
+  {
+    "name": "Discord Bot",
+    "description": "Developing a custom Discord bot to enhance server interactions and automate tasks with music tools. Integrated the API using Django as the backend.",
+    "tags": ["NodeJS", "Discord.js", "Django"],
+    "url": ""
+  },
+  {
+    "name": "Password Management Website",
+    "description": "Developing a password management website to securely store and manage user credentials, with Google auth and 2FA login methods.",
+    "tags": ["NodeJS", "Next.js"],
+    "url": ""
+  }
+]

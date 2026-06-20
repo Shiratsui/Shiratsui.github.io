@@ -2,6 +2,8 @@ const year = document.querySelector("#year");
 const themeToggle = document.querySelector(".theme-toggle");
 const themeToggleText = document.querySelector(".theme-toggle-text");
 const experienceTimeline = document.querySelector("#experience-timeline");
+const projectList = document.querySelector("#project-list");
+const skillList = document.querySelector("#skill-list");
 
 function formatDurationFrom(startValue, endDate = new Date()) {
   const [startYear, startMonth, startDay = 1] = startValue.split("-").map(Number);
@@ -64,6 +66,20 @@ function createTagList(skills, label) {
   });
 
   return list;
+}
+
+function formatProjectIndex(index) {
+  return String(index + 1).padStart(2, "0");
+}
+
+async function loadJson(path) {
+  const response = await fetch(path);
+
+  if (!response.ok) {
+    throw new Error(`Unable to load ${path}: ${response.status}`);
+  }
+
+  return response.json();
 }
 
 function renderExperience(data) {
@@ -134,17 +150,85 @@ async function loadExperience() {
   }
 
   try {
-    const response = await fetch("data/experience.json");
-
-    if (!response.ok) {
-      throw new Error(`Unable to load experience data: ${response.status}`);
-    }
-
-    const data = await response.json();
+    const data = await loadJson("data/experience.json");
     renderExperience(data);
-    setupRevealAnimations();
   } catch (error) {
     experienceTimeline.innerHTML = '<p class="timeline-status">Experience data could not be loaded. Run a local server or check data/experience.json.</p>';
+  }
+}
+
+function renderProjects(projects) {
+  if (!projectList) {
+    return;
+  }
+
+  const cards = projects.map((project, index) => {
+    const card = document.createElement("article");
+    card.className = "project-card reveal-item";
+
+    const projectIndex = document.createElement("span");
+    projectIndex.className = "project-index";
+    projectIndex.textContent = formatProjectIndex(index);
+
+    const title = document.createElement("h3");
+
+    if (project.url) {
+      const link = document.createElement("a");
+      link.href = project.url;
+      link.textContent = project.name;
+      title.append(link);
+    } else {
+      title.textContent = project.name;
+    }
+
+    const description = document.createElement("p");
+    description.textContent = project.description;
+
+    card.append(projectIndex, title, description, createTagList(project.tags, `${project.name} technologies`));
+
+    return card;
+  });
+
+  projectList.replaceChildren(...cards);
+}
+
+async function loadProjects() {
+  if (!projectList) {
+    return;
+  }
+
+  try {
+    const projects = await loadJson("data/projects.json");
+    renderProjects(projects);
+  } catch (error) {
+    projectList.innerHTML = '<p class="section-status">Projects could not be loaded. Run a local server or check data/projects.json.</p>';
+  }
+}
+
+function renderSkills(skills) {
+  if (!skillList) {
+    return;
+  }
+
+  const skillItems = skills.map((skill) => {
+    const item = document.createElement("span");
+    item.textContent = skill;
+    return item;
+  });
+
+  skillList.replaceChildren(...skillItems);
+}
+
+async function loadSkills() {
+  if (!skillList) {
+    return;
+  }
+
+  try {
+    const skills = await loadJson("data/skills.json");
+    renderSkills(skills);
+  } catch (error) {
+    skillList.innerHTML = '<p class="section-status">Skills could not be loaded. Run a local server or check data/skills.json.</p>';
   }
 }
 
@@ -204,5 +288,4 @@ function setupRevealAnimations() {
   revealElements.forEach((element) => revealObserver.observe(element));
 }
 
-loadExperience();
-setupRevealAnimations();
+Promise.all([loadExperience(), loadProjects(), loadSkills()]).finally(setupRevealAnimations);

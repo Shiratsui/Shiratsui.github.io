@@ -16,7 +16,7 @@ Then open:
 http://localhost:8000
 ```
 
-The local server is needed because the experience timeline loads from `data/experience.json`.
+The local server is needed because the page loads data from JSON files in `data/`.
 
 ## Customize
 
@@ -24,7 +24,6 @@ Edit `index.html` to update:
 
 - Your name and role
 - The hero intro text
-- Project names, descriptions, tags, and links
 - Email, GitHub, and LinkedIn URLs
 
 Edit `styles.css` to change:
@@ -45,6 +44,17 @@ Edit `data/experience.json` to update:
 - Company name and mark
 - Company duration start date
 - Job titles, dates, locations, descriptions, and skills
+
+Edit `data/projects.json` to update:
+
+- Project names
+- Descriptions
+- Technology tags
+- Optional project URLs
+
+Edit `data/skills.json` to update:
+
+- Technical skills shown in the Skills section
 
 ## Deploy to GitHub Pages
 
